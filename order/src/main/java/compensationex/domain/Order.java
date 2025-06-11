@@ -44,12 +44,12 @@ private String status;
     
     
 private String address;
-
+    
     @PostPersist
     public void onPostPersist(){
-    Inventory inventory = OrderApplication.applicationContext
-        .getBean(compensationex.external.InventoryService.class)
-        .checkStock(get??);
+    // Inventory inventory = OrderApplication.applicationContext
+    //     .getBean(compensationex.external.InventoryService.class)
+    //     .checkStock(get??);
 
 
         OrderPlaced orderPlaced = new OrderPlaced(this);
@@ -57,8 +57,8 @@ private String address;
 
 
 
-        OrderCancelled orderCancelled = new OrderCancelled(this);
-        orderCancelled.publishAfterCommit();
+        // OrderCancelled orderCancelled = new OrderCancelled(this);
+        // orderCancelled.publishAfterCommit();
 
     
     }
@@ -80,19 +80,17 @@ private String address;
         Order order = new Order();
         repository().save(order);
 
-        */
+        */      
 
-        /** Example 2:  finding and process
-        
-
-        repository().findById(outOfStock.get???()).ifPresent(order->{
-            
-            order // do something
+        repository().findById(
+            outOfStock.getOrderId()
+            ).ifPresent(order->{
+            order.setStatus("Order Cancelled");
             repository().save(order);
 
 
          });
-        */
+
 
         
     }
